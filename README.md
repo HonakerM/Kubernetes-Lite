@@ -58,7 +58,7 @@ client.resource("apps/v1", "Deployment").list()
 * ⚡ 300ms+ faster startup—ideal for CLI tools or cron jobs
 
 > [!NOTE]
-> To be honest the "20%" runtime improvement is just a part of the sales pitch and isn't really impactful in the real world. The official client is only 1-3ms behind Kubernetes Lite, which would not impact a networked client where network latencies usually are higher than 1ms.
+> To be honest the "20%" runtime improvement is just a part of the sales pitch and isn't noticble in the real world. The official client is only 1-3ms behind Kubernetes Lite, which would not impact a networked client where network latencies usually are higher than 1ms. On the other hand, the 300ms startup improvement can be big for often used scripts.
 
 ![client runtime operation timings](./docs/current/images/client_runtime_operations.png)
 ![client startup operation timings](./docs/current/images/client_startup_operations.png)
