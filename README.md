@@ -18,7 +18,9 @@
 Kubernetes Lite provides Python bindings to Go's [`envtest`](https://pkg.go.dev/sigs.k8s.io/controller-runtime/pkg/envtest)—an isolated, real Kubernetes control plane for testing your Python clients and controllers. This eliminates the need for mocking or spinning up complex test environments.
 
 ✅ Works with *any* Kubernetes client
+
 ✅ Seamless integration with `pytest`
+
 ✅ Mirrors Go’s native test workflow, including support for `KUBEBUILDER_ASSETS` and `USE_EXISTING_CLUSTER`
 
 **Example: Using EnvTest with the official Kubernetes client**
@@ -56,11 +58,31 @@ client.resource("apps/v1", "Deployment").list()
 * ⚡ 300ms+ faster startup—ideal for CLI tools or cron jobs
 
 > [!NOTE]
-> One caveat is that the "20%" runtime improvement is on top of a fast standard client. The official client is only 1-3ms behind Kubernetes Lite, which would not impact a networked client where network latencies usually are much higher than 1ms.
+> To be honest the "20%" runtime improvement is just a part of the sales pitch and isn't really impactful in the real world. The official client is only 1-3ms behind Kubernetes Lite, which would not impact a networked client where network latencies usually are higher than 1ms.
 
 ![client runtime operation timings](./docs/current/images/client_runtime_operations.png)
 ![client startup operation timings](./docs/current/images/client_startup_operations.png)
 ![client memory usage](./docs/current/images/client_memory_usage.png)
+
+---
+
+## 🛠 Setup EnvTest (CLI)
+
+To aid in setting up `envtest` we also provide a wrapper around the [`setup-envtest`](https://pkg.go.dev/sigs.k8s.io/controller-runtime/tools/setup-envtest) cli:
+
+```bash
+python3 -m kubernetes_lite.setup_envtest use
+```
+
+Output:
+
+```
+Version: 1.32.0
+OS/Arch: darwin/amd64
+Path: /Users/yourname/.../k8s/1.32.0-darwin-amd64
+```
+
+You may use it manually before running your tests or let the `EnvTest` class handle it automatically during startup.
 
 ---
 
@@ -83,27 +105,6 @@ Make sure you have Go 1.23+ installed:
 ```bash
 pip3 install --no-binary "kubernetes_lite" kubernetes_lite
 ```
-
----
-
-## 🛠 Setup EnvTest (CLI)
-
-To aid in setting up `envtest` we also provide a wrapper around the [`setup-envtest`](https://pkg.go.dev/sigs.k8s.io/controller-runtime/tools/setup-envtest) cli:
-
-```bash
-python3 -m kubernetes_lite.setup_envtest use
-```
-
-Output:
-
-```
-Version: 1.32.0
-OS/Arch: darwin/amd64
-Path: /Users/yourname/.../k8s/1.32.0-darwin-amd64
-```
-
-You may use it manually before running your tests or let the `EnvTest` class handle it automatically during startup.
-
 ---
 
 ## 📚 Documentation
